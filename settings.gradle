@@ -1,0 +1,3 @@
+include ':backend'
+
+rootProject.name = 'pi_grpc_server'

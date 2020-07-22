@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package com.sky.backend.grpc.pi;
+
+option java_multiple_files = true;
+
+service PiAccess{
+
+  rpc shutdown(GeneralRequest) returns (GeneralResponse);
+
+  rpc getBoardInfo (GeneralRequest) returns (BoardInfoResponse);
+
+  rpc setSwitchState(SwitchState) returns (GeneralResponse);
+
+  rpc listenPinState(GeneralRequest)returns (GeneralResponse);
+
+  rpc setPwm(PwmRequest) returns (GeneralResponse);
+
+  rpc getDigitalInput(GeneralRequest)returns  (GeneralResponse);
+
+}
+
+message GeneralRequest{
+  string deviceID = 1;
+}
+
+message GeneralResponse{
+  bool isCommandSuccess = 1;
+}
+
+message BoardInfoResponse{
+  string make = 1;
+  string model = 2;
+  int32 memory = 3;
+  string libraryPath = 4;
+  float adcVRef = 5;
+}
+
+message SwitchState{
+  bool isOn = 1;
+  int32 pinNo = 2;
+}
+
+message PwmRequest{
+  int32 pin = 1;
+  float dutyCycle = 2;
+  int32 frequency = 3;
+}
